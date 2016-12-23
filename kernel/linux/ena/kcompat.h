@@ -290,7 +290,12 @@ static inline u32 ethtool_rxfh_indir_default(u32 index, u32 n_rx_rings)
 #endif /* >= 3.8.0 */
 
 /*****************************************************************************/
-#if ( LINUX_VERSION_CODE >= KERNEL_VERSION(3,12,0) )
+#if (( LINUX_VERSION_CODE == KERNEL_VERSION(3,10,0) ) && \
+     ( RHEL_RELEASE_CODE && RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(7,3)))
+#define HAVE_NDO_SELECT_QUEUE_ACCEL_FALLBACK
+
+/*****************************************************************************/
+#elif ( LINUX_VERSION_CODE >= KERNEL_VERSION(3,12,0) )
 #if ( SLE_VERSION_CODE && SLE_VERSION_CODE >= SLE_VERSION(12,0,0))
 #define HAVE_NDO_SELECT_QUEUE_ACCEL_FALLBACK
 #endif
